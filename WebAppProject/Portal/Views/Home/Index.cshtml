@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<PatientInfoViewModel>;
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-10 px-3 py-5 m-5 rounded-3 shadow-lg bg-light">
+            <h1>Welkom bij Avans Fysio</h1>
+            <div class="pt-3 ">
+                <a class="btn btn-primary m-2" asp-controller="Authentication" asp-action="Login">Login</a>
+                <a class="btn btn-primary m-2" asp-controller="Authentication" asp-action="Register">Registreren</a>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-lg-5 align-self-center">
+            <div class="py-2">
+                <h2 class="text-start">Over Avans Fysio</h2>
+                <p class="text-start">
+                    Avans Fysio is een fysiotherapiepraktijk voor medewerkers en studenten van Avans. U kunt dus gewoon bij Avans terecht voor klachten als rugpijn, moeheid etc. Daarnaast geeft de praktijk studenten van Fysiotherapie, een kans om, onder toezicht,
+                    hun kennis in de praktijk te brengen.
+                </p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <div class="col-12 col-md-10 col-lg-12 col-xl-10 m-auto">
+                <img class="img-fluid" src="~/assets/images/fysio-1.jpg" alt="Een fysiotherapeut praat met een patient" />
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-6 pt-5">
+            <h2 class="">Afspraak maken</h2>
+            <p class="text-start">
+                Bij Avans Fysio kunt u online uw afspraken beheren. Dit zorgt ervoor dat u zelf afspraken kan maken en wijzigen. Om dit te doen heeft u een account nodig.
+                Als u deze nog niet heeft, kunt u deze maken mits u al een intake heeft gehad. Als u al een intake heeft gehad, kunt u op
+                de "registreren" knop klikken. Als u al een account heeft kunt u op de "login" knop klikken.
+            </p>
+        </div>
+    </div>
+</div>

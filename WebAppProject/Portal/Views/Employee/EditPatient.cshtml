@@ -1,0 +1,121 @@
+﻿@model PatientEditViewModel
+
+@{
+    ViewData["Title"] = "EditPatient";
+}
+
+<h1>Gegevens aanpassen</h1>
+
+
+<div class="row py-3">
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <div class="col-md-4">
+        <form asp-action="EditPatient">
+            <div asp-validation-summary="All" aria-label="Validatie van het formulier"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientId" />
+            <input type="hidden" asp-for="PatientFileId" />
+            <input type="hidden" asp-for="TreatmentPlanId" />
+            <div class="form-group">
+                <label asp-for="RegistrationNumber" class="control-label"></label>
+                <input asp-for="RegistrationNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Dob" class="control-label"></label>
+                <input asp-for="Dob" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender">Geslacht</label>
+                <select asp-for="Gender">
+                    <option value="">Kies een van de mogelijkheden</option>
+                    <option value="Male">Man</option>
+                    <option value="Female">Vrouw</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAdress" class="control-label"></label>
+                <input asp-for="EmailAdress" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="DiagnosisId" class="control-label"></label>
+                <div class="container w-100 p-0 m-0">
+                    <select class="h-100 w-100" asp-for="DiagnosisId" asp-items="@(new SelectList(ViewBag.Diagnoses, "Id", null))">
+                        <option value="-1">Kies een van de mogelijkheden</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiagnosisDescription" class="control-label"></label>
+                <input asp-for="DiagnosisDescription" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label"></label>
+                <input asp-for="Condition" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="KindOfPatient" class="control-label"></label>
+                <select asp-for="KindOfPatient">
+                    <option value="">Kies een van de mogelijkheden</option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Medewerker</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IntakeById" class="control-label"></label>
+                <select asp-for="IntakeById" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))">
+                    <option disabled selected value="-1">Kies een van de mogelijkheden</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IntakeUnderSupervisionOfId" class="control-label"></label>
+                <select asp-for="IntakeUnderSupervisionOfId" asp-items="@(new SelectList(ViewBag.Therapists, "Id", "Name"))">
+                    <option selected value="-1">Kies een van de mogelijkheden</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfAdmission" class="control-label"></label>
+                <input asp-for="DateOfAdmission" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MainTherapistId" class="control-label"></label>
+                <select asp-for="MainTherapistId" asp-items="@(new SelectList(ViewBag.Therapists, "Id", "Name"))">
+                    <option disabled selected value="-1">Kies een van de mogelijkheden</option>
+                </select>
+            </div>
+            @*<div class="form-group">
+                    <label asp-for="Remarks" class="control-label"></label>
+                    <input asp-for="Remarks" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SessionDuration" class="control-label"></label>
+                    <input asp-for="SessionDuration" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SessionCount" class="control-label"></label>
+                    <input asp-for="SessionCount" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Proceeding" class="control-label"></label>
+                    <input asp-for="Proceeding" class="form-control" />
+                </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">Terug naar home</a>
+</div>
+

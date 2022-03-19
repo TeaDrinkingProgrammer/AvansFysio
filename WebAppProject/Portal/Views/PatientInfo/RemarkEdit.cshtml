@@ -1,0 +1,41 @@
+﻿@model RemarkViewModel
+
+@{
+    ViewData["Title"] = "View";
+    //< a asp - action = "Edit" asp - route - id = "" > Edit </ a > | @Model.PatientId
+}
+
+
+
+<div class="py-3">
+    <div class="row d-inline-flex justify-content-center">
+        <div class="col-9">
+            <h1>Opmerking toevoegen</h1>
+        </div>
+        <div class="col-3">
+            <a class="btn btn-primary text-center my-auto" asp-action="RemarksDetail" asp-route-id="@Model.PatientFileId">Edit</a>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" aria-label="Validatie van het formulier"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientFileId" />
+            <div class="form-group">
+                <label asp-for="RemarkText" class="control-label align-self-center">Opmerking</label>
+                <textarea asp-for="RemarkText" class="form-control align-self-center"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisibleForPatient" class="control-label align-self-center">Is de opmerking zichtbaar voor patient?</label>
+                <input type="checkbox" asp-for="VisibleForPatient" class="align-self-center" />
+            </div>
+            <div class="form-group">
+                <button asp-action="RemarkEdit" class="btn btn-primary my-3" type="submit">Voeg Opmerking toe</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Terug naar home</a>
+</div>

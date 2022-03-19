@@ -1,0 +1,103 @@
+﻿@model EmployeeHomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+@await Html.PartialAsync("UserWelcome")
+
+<div class="row d-flex justify-content-center p-2">
+    <h2>Beschikbaarheid</h2>
+    <a asp-controller="Employee" asp-action="EditAvailability" asp-route-id="@Model.Id" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Beschikbaarheid opgeven</a>
+    <h2>Behandelingen</h2>
+    <div class="col-12 table-responsive pt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Tijd</th>
+                    <th scope="col">Knoppen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var treatment in Model.Treatments) {
+                    <tr>
+                        <td>@treatment.Date.ToString("D", ViewBag.cultureInfo)</td>
+                        <td><a asp-controller="Employee" asp-action="EditTreatment" asp-route-id="@treatment.Id" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Wijzigen </a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center p-2">
+    <h2>Beschikbaarheid</h2>
+    <a asp-controller="Employee" asp-action="EditAvailability" asp-route-id="@Model.Id" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Beschikbaarheid opgeven</a>
+    <h2>Behandelingen</h2>
+    <h2>Afspraken</h2>
+    <div class="col-12 table-responsive pt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Tijd</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Knoppen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model.Appointments) {
+                    <tr>
+                        <td>@appointment.DateRange.Start.ToString("D", ViewBag.cultureInfo)</td>
+                        <td>@appointment.DateRange.Start.ToString("t", ViewBag.cultureInfo) - @appointment.DateRange.End.ToString("t", ViewBag.cultureInfo)</td>
+                        <td>@appointment.Patient.Name</td>
+                        <td><a asp-controller="Employee" asp-action="EditAppointment" asp-route-id="@appointment.Id" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Wijzigen </a><a asp-controller="PatientInfo" asp-action="CancelAppointment" asp-route-id="@appointment.Id" class="btn btn-primary">Annuleren</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center p-2">
+    <div class="row d-flex justify-content-center p-2 ">
+        <div class="col-6"><h2>Patienten</h2> </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a asp-controller="AddPatient" asp-action="Index" id="loginButton" class="btn btn-primary my-3 float-right" onclick="loadingIcon()" type="submit">
+                <div id="buttonTextDiv" style="">
+                    Nieuwe patient
+                </div>
+                <div id="loadingIconDiv" style="display: none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Laden...</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-12 table-responsive pt-3 ">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Knoppen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    @for (int i = 0; i < Model.Patients.Count(); i++) {
+                        PatientInfoViewModel patient = Model.Patients.ToList()[i];
+                        <tr>
+                            <th scope="row">@patient.PatientId</th>
+                            <td>@patient.Name</td>
+                            <td>
+                                <a asp-controller="Employee" asp-action="NewAppointment" asp-route-id="@patient.PatientId" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Nieuwe Afspraak </a><a asp-controller="Employee" asp-action="EditPatient" asp-route-id="@patient.PatientId" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Gegevens wijzigen</a><a asp-controller="Employee" asp-action="PatientDetails" asp-route-id="@patient.PatientId" class="btn btn-primary">Patientendossier</a>
+                                <a asp-controller="Employee" asp-action="EditTreatment" asp-route-id="-1" asp-route-patientId="@patient.PatientId" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Behandeling toevoegen</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

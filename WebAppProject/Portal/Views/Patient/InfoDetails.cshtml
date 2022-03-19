@@ -1,0 +1,76 @@
+﻿@model InfoDetailsViewModel
+
+@{
+    ViewData["Title"] = "View";
+    //< a asp - action = "Edit" asp - route - id = "" > Edit </ a > | @Model.PatientId
+}
+
+
+
+<div class="py-3">
+    <div class="row d-inline-flex justify-content-center">
+        <div class="col-9">
+            <h1>@Html.DisplayFor(model => model.Name)</h1>
+        </div>
+        @*<div class="col-3">
+                <a class="btn btn-primary text-center my-auto" asp-action="EditPatient" asp-route-id="@Model.PatientId">Edit</a>
+            </div>*@
+    </div>
+    <hr />
+    <dl class="row d-flex">
+        <dt class="col-sm-2">
+            Registratienummer
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+        <dt class="col-sm-2">
+            Naam
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Foto
+        </dt>
+        <dt class="col-sm-5">
+            <img src="@Model.Image" class="w-25 img-fluid rounded d-block" />
+        </dt>
+        <dt class="col-sm-5">
+        </dt>
+        <dt class="col-sm-2">
+            Telefoonnummer
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt class="col-sm-2">
+            Geboortedatum
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dob)
+        </dd>
+        <dt class="col-sm-2">
+            Gender
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            EmailAdres
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmailAdress)
+        </dd>
+        <dt class="col-sm-2">
+            Telefoonnummer
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Terug naar home</a>
+</div>

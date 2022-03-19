@@ -1,0 +1,32 @@
+﻿@section Scripts {
+    <script src="~/js/loadingIcon.js"></script>
+}
+@model RegisterModel
+
+<div class="shadow rounded-3 align-self-center my-3">
+    <div class="row d-flex justify-content-center py-2">
+        <div class="col-12 d-flex justify-content-center">
+            <h2>Account Aangemaakt</h2>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center py-2">
+        <div class="col-12  d-flex justify-content-center">
+            <p>U kunt nu inloggen</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center py-2">
+        <div class="col-6 col-md-4 col-lg-2 d-flex p-0 justify-content-center bg-success rounded-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="img-fluid" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l5 5l10 -10"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center py-2">
+        <div class="col-12 p-0 d-flex justify-content-center">
+            <form asp-action="Index" asp-controller="Home" method="post">
+                <button class="btn btn-primary btn-lg" type="submit">Ok </button>
+            </form>
+        </div>
+    </div>
+</div>

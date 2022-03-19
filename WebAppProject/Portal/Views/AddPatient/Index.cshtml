@@ -1,0 +1,162 @@
+﻿@using Domain
+@section Styles {
+    <link rel="stylesheet" href="~/css/wizard.css" />
+}
+@section Scripts {
+    <script src="~/js/zangdar.min.js"></script>
+    <script src="~/js/wizard.js"></script>
+    <script src="~/js/loadingIcon.js"></script>
+}
+@model AddPatientViewModel
+@{
+    ViewData["Title"] = "AddPatient";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 align-self-center">
+            <div class="m-3 m-lg-5 d-flex flex-column">
+                <div class="text-center mt-4 mb-3">
+                    <h1 class="h3">Patient aanmaken</h1>
+                </div>
+                <ul id="steps-native" class="nav nav-pills justify-content-center"></ul>
+                <div class="col-5 align-self-center">
+                    <form method="post" id="wizard" enctype="multipart/form-data" class="my-2 py-2 d-flex flex-column justify-content-center w-100">
+                        <div class=" d-flex justify-content-center w-100" asp-validation-summary="All" aria-label="Validatie van het formulier"></div>
+                        <div class="d-flex justify-content-center w-100">
+                            <section data-step="1. Persoonlijke informatie">
+                                <div class="form-group">
+                                    <label asp-for="Name">Naam</label>
+                                    <input asp-for="Name" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Dob">Geboortedatum</label>
+                                    <input asp-for="Dob" value="2002-01-01" data-date-format="dd-mm-yyyy" type="date" data-val="true" data-val-required="Vul AUB een geldige geboortedatum in" id="Dob" name="Dob">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Gender">Geslacht</label>
+                                    <select asp-for="Gender">
+                                        <option value="">Kies een van de mogelijkheden</option>
+                                        <option value="Male">Man</option>
+                                        <option value="Female">Vrouw</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="EmailAdress">Emailadres</label>
+                                    <input asp-for="EmailAdress" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="RegistrationNumber">Registratienummer</label>
+                                    <input asp-for="RegistrationNumber" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber">Telefoonnummer</label>
+                                    <input asp-for="PhoneNumber" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Image">Foto uploaden (max. 2MB)</label>
+                                    <input asp-for="Image" type="file" accept="image/*"/>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-12 text-right d-flex justify-content-end">
+                                        <button class="btn btn-primary" data-next>Volgende</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section data-step="2. Patientdossier">
+                                <div class="form-group">
+                                    <label asp-for="DiagnosisId">Diagnosis</label>
+                                    <div class="container w-100 p-0 m-0">
+                                        <select class="h-100 w-100" asp-for="DiagnosisId" asp-items="@(new SelectList(ViewBag.Diagnoses, "Id", null))">
+                                            <option value="-1">Kies een van de mogelijkheden</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="KindOfPatient">Is de patient een student of medewerker van Avans</label>
+                                    <select asp-for="KindOfPatient">
+                                        <option value="">Kies een van de mogelijkheden</option>
+                                        <option value="Student">Student</option>
+                                        <option value="Employee">Medewerker</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Condition">Klachtenbeschrijving</label>
+                                    <textarea asp-for="Condition"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="IntakeById">Intake gedaan door</label>
+                                    <select asp-for="IntakeById" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))">
+                                        <option disabled selected value="-1">Kies een van de mogelijkheden</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="IntakeUnderSupervisionOfId">Intake onder supervisie van (niet verplicht)</label>
+                                    <select asp-for="IntakeUnderSupervisionOfId" asp-items="@(new SelectList(ViewBag.Therapists, "Id", "Name"))">
+                                        <option disabled selected value="-1">Kies een van de mogelijkheden</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DateOfAdmission">Aanmelddatum</label>
+                                    <input asp-for="DateOfAdmission" data-date-format="dd-mm-yyyy" type="date" data-val="true" data-val-required="Vul AUB een geldige aanmelddatum in" id="DateOfAdmission" name="DateOfAdmission">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="MainTherapistId">Hoofdtherapeut</label>
+                                    <select asp-for="MainTherapistId" asp-items="@(new SelectList(ViewBag.Therapists, "Id", "Name"))">
+                                        <option disabled selected value="-1">Kies een van de mogelijkheden</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <button class="btn btn-outline-primary" data-prev>Vorige</button>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">
+                                        <button class="btn btn-primary" data-next>Volgende</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section data-step="3. Behandelplan">
+                                <div class="form-group">
+                                    <label asp-for="SessionDuration">Sessieduur in minuten</label>
+                                    <input asp-for="SessionDuration" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="SessionCount">Aantal sessies per week</label>
+                                    <input asp-for="SessionCount" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ProceedingCode">Behandeling</label>
+                                    <div class="container w-100 p-0 m-0">
+                                        <select class="h-100 w-100" style="overflow-wrap:break-word" asp-for="ProceedingCode" asp-items="@(new SelectList(ViewBag.Proceedings, "Id", null))">
+                                            <option value="-1">Kies een van de mogelijkheden</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <button class="btn btn-outline-primary" data-prev>Vorige</button>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button asp-controller="AddPatient" asp-action="Index" id="loginButton" class="btn btn-primary my-3 float-right" onclick="loadingIcon()" type="submit">
+                                            <div id="buttonTextDiv" style="">
+                                                Patient aanmaken
+                                            </div>
+                                            <div id="loadingIconDiv" style="display: none">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                <span class="sr-only">Laden...</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

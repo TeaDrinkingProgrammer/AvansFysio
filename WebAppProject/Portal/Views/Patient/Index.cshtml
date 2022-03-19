@@ -1,0 +1,107 @@
+﻿@model PatientDetailsViewModel;
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-10 px-3 py-4 m-5 rounded-3 bg-light text-center">
+        <h1>Welkom @User.Identity.Name</h1>
+        <a asp-controller="Patient" asp-action="InfoDetails" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Accountinfo</a>
+        <a asp-controller="Patient" asp-action="PatientDetails" asp-route-id="-1" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Dossier</a>
+        <a asp-controller="Patient" asp-action="EditAppointment" asp-route-id="-1" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Afspraak maken</a>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center p-2">
+    <h2>Afspraken</h2>
+    <div class="col-12 table-responsive pt-3">
+        @if (Model.Appointments.Any()) {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Tijd</th>
+                        <th scope="col">Therapeut</th>
+                        <th scope="col">Knoppen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var appointment in Model.Appointments) {
+                        <tr>
+                            <td>@appointment.DateRange.Start.ToString("D", ViewBag.cultureInfo)</td>
+                            <td>@appointment.DateRange.Start.ToString("t", ViewBag.cultureInfo) - @appointment.DateRange.End.ToString("t", ViewBag.cultureInfo)</td>
+                            <td>@appointment.Employee.Name</td>
+                            <td><a asp-controller="Patient" asp-action="EditAppointment" class="btn btn-primary me-lg-2 mb-2 mb-lg-0">Wijzigen </a><a asp-controller="PatientInfo" asp-action="CancelAppointment" asp-route-id="@appointment.Id" class="btn btn-primary">Annuleren</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else {
+            <div>
+                <p>U heeft geen afspraken</p>
+            </div>
+        }
+
+    </div>
+</div>
+<div class="row d-flex justify-content-center p-2 ">
+    <h2>Opmerkingen</h2>
+    @if (Model.Remarks.Any()) {
+        <div class="col-12 table-responsive pt-3 ">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Tijd</th>
+                        <th scope="col">Dokter</th>
+                        <th scope="col">Opmerking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var remark in Model.Remarks) {
+                        <tr>
+                            <td>@remark.Date.ToString("D", ViewBag.cultureInfo)</td>
+                            <td>@remark.Date.ToString("t", ViewBag.cultureInfo)</td>
+                            <td>@remark.RemarkBy.Name</td>
+                            <td>
+                                <p>@remark.RemarkText</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } else {
+        <div>
+            <p>U heeft geen opmerkingen</p>
+        </div>
+    }
+</div>
+<div class="row d-flex justify-content-center p-2">
+    <h2>Behandelingen</h2>
+    <div class="col-12 table-responsive pt-3">
+        @if (Model.Treatments.Any()) {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Door</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var treatment in Model.Treatments) {
+                        <tr>
+                            <td>@treatment.Date.ToString("D", ViewBag.cultureInfo)</td>
+                            <td>@treatment.CarriedOutBy.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else {
+            <div>
+                <p>U heeft geen behandelingen</p>
+            </div>
+        }
+
+    </div>
+</div>

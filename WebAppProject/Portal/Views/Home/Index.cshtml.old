@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<PatientInfoViewModel>;
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <a class="btn btn-primary my-2" asp-action="AddPatient">Voeg patient toe.</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Patientnummer</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Geboortedatum</th>
+                <th scope="col">Geslacht</th>
+                <th scope="col">Emailadres</th>
+                <th scope="col">Telefoonnummer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PatientInfoViewModel patient in Model) {
+                <tr>
+                    <th scope="row"><a asp-controller="Detail" asp-action="Index" asp-route-id="@patient.PatientId">@patient.PatientId</a></th>
+                    <td>@patient.Name</td>
+                    <td>@patient.Dob</td>
+                    <td>@patient.Gender</td>
+                    <td>@patient.EmailAdress</td>
+                    <td>@patient.PhoneNumber</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

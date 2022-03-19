@@ -1,0 +1,13 @@
+﻿.zangdar__wizard {
+    display: block;
+    height: 100%;
+    position: relative;
+}
+
+.zangdar__step {
+    display: none;
+}
+
+    .zangdar__step.zangdar__step__active {
+        display: block;
+    }

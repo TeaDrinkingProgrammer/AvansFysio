@@ -1,0 +1,69 @@
+﻿@model EditTreatmentViewModel
+@using Domain;
+@{
+    if (Model.Id == -1) {
+        ViewData["Title"] = "Behandeling toevoegen";
+    } else {
+        ViewData["Title"] = "Behandeling wijzigen";
+    }
+
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="row py-3">
+    <hr />
+    <div class="col-md-4">
+        <form asp-action="EditTreatment">
+            <div asp-validation-summary="All" aria-label="Validatie van het formulier"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PatientId" />
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Datum</label>
+                <input asp-for="Date" data-date-format="dd-mm-yyyy" type="date" data-val="true" data-val-required="Vul AUB een datum in" id="Date" name="Date">
+            </div>
+            <div class="form-group">
+                <label asp-for="Room">Kamer</label>
+                <div class="container w-100 p-0 m-0">
+                    <select class="h-100 w-100" style="overflow-wrap:break-word" asp-for="Room" asp-items="@Html.GetEnumSelectList<LocationEnum>()">
+                        <option value="-1">Kies een van de mogelijkheden</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProceedingCode">Behandeling || Is een opmerking verplicht</label>
+                <div class="container w-100 p-0 m-0">
+                    <select class="h-100 w-100" style="overflow-wrap:break-word" asp-for="ProceedingCode" asp-items="@(new SelectList(ViewBag.Proceedings, "Id", null))">
+                        <option value="-1">Kies een van de mogelijkheden</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarriedOutById" class="control-label">Uitgevoerd door</label>
+                <div class="container w-100 p-0 m-0">
+                    <select class="h-100 w-100" asp-for="CarriedOutById" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))">
+                        <option value="-1">Kies een van de mogelijkheden</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreatmentRemarks" class="control-label">Bijzonderheden</label>
+                <textarea asp-for="TreatmentRemarks" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisibleForPatient" class="control-label align-self-center">Is de opmerking zichtbaar voor patient?</label>
+                <input type="checkbox" asp-for="VisibleForPatient" class="align-self-center" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Voeg behandeling toe" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">Terug naar home</a>
+</div>
+

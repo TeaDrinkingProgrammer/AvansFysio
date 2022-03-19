@@ -1,0 +1,54 @@
+﻿// Override Bootstrap's Sass default variables
+//
+// Nearly all variables in Bootstrap are written with the `!default` flag.
+// This allows you to override the default values of those variables before
+// you import Bootstrap's source Sass files.
+//
+// Overriding the default variable values is the best way to customize your
+// CSS without writing _new_ styles. For example, change you can either change
+// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
+// `body { color: red; }`.
+
+//Custom styles
+
+//https://getbootstrap.com/docs/5.0/getting-started/rtl/#alternative-font-stack
+$font-family-sans-serif: 'Poppins',
+//Sans serif for fallback
+sans-serif,
+// Emoji fonts
+"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$headings-font-family: 'Roboto Condensed', sans-serif;
+
+
+$primary: #3875BA;
+$dark: #181721;
+
+@import "../lib/bootstrap/scss/bootstrap";
+
+.form-group {
+    @extend .my-3;
+    @extend .d-flex;
+    @extend .justify-content-center;
+    @extend .flex-column;
+}
+
+.form-group label {
+    @extend .pb-2;
+}
+
+.form-group input {
+    @extend .d-block;
+}
+
+.form-group select {
+    @extend .d-block;
+}
+
+.form-group textarea {
+    @extend .d-block
+}
+
+.input-validation-error {
+    @extend .border-danger;
+}

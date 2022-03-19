@@ -1,0 +1,64 @@
+﻿@model AvailabilityViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<h4>Availibility</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <h2>Als je op een dag niet werkt, voer dan bij start en eindtijd 0 in</h2>
+    </div>
+    <div class="col-md-4">
+        <form asp-action="EditAvailability">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmployeeId" />
+            @for (int i = 0; i < Model.Availibility.Length; i++) {
+                @switch (i) {
+                    case 0:
+                        <h3>Zondag</h3>
+                        break;
+                    case 1:
+                        <h3>Maandag</h3>
+                        break;
+                    case 2:
+                        <h3>Dinsdag</h3>
+                        break;
+                    case 3:
+                        <h3>Woensdag</h3>
+                        break;
+                    case 4:
+                        <h3>Donderdag</h3>
+                        break;
+                    case 5:
+                        <h3>Vrijdag</h3>
+                        break;
+                    case 6:
+                        <h3>Zaterdag</h3>
+                        break;
+                }
+                <div class="form-group">
+                    <label asp-for="@Model.Availibility[i].StartHour" class="control-label"> Starttijd (bijv. 9 voor 9 uur)</label>
+                    <input asp-for="@Model.Availibility[i].StartHour" class="form-control" />
+                    <span asp-validation-for="@Model.Availibility[i].StartHour" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Availibility[i].EndHour" class="control-label">Eindtijd (bijv. 17 voor 17:00 uur)</label>
+                    <input asp-for="@Model.Availibility[i].EndHour" class="form-control" />
+                    <span asp-validation-for="@Model.Availibility[i].EndHour" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Wijzigen" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Terug naar home</a>
+</div>
+
